@@ -16,6 +16,9 @@ func change_savefile_number(number: int) -> void:
 	file_manager.set_file_number(number)
 	savefile_number_changed.emit()
 
+func get_savefile() -> ConfigFile:
+	return file_manager.get_file()
+	
 func add_save_object(node: Node) -> void:
 	if node.has_method("save_to_file") and not nodes_to_save.has(node):
 		nodes_to_save.append(node)
