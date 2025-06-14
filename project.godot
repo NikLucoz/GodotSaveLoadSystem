@@ -1,0 +1,28 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GodotSaveLoadSystem"
+config/description="Enter an interesting project description here!"
+config/features=PackedStringArray("4.4")
+config/icon="res://icon.png"
+
+[autoload]
+
+SaveLoadSystem="*res://addons/GodotSaveLoadSystem/save_load_system.gd"
+
+[dotnet]
+
+project/assembly_name="GodotSaveLoadSystem"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotSaveLoadSystem/plugin.cfg")
