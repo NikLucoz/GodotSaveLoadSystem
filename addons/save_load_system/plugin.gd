@@ -8,15 +8,16 @@ const ENCRYPTION_KEY_SETTING_NAME: String = "save_load_system/encryption_key"
 func _enable_plugin() -> void:
 	if not Engine.has_singleton(AUTOLOAD_NAME):
 		add_autoload_singleton(AUTOLOAD_NAME, "res://addons/save_load_system/save_load_system.gd")
+		SaveLoadSystem._initial_configuration(SAVE_PATH, 1)
 
 func _disable_plugin() -> void:
 	remove_autoload_singleton(AUTOLOAD_NAME)@tool
-extends EditorPlugin
 
 const AUTOLOAD_NAME = "SaveLoadSystem"
 const USE_ENCRYPTION_SETTING_NAME: String = "save_load_system/use_encryption"
 const ENCRYPTION_KEY_SETTING_NAME: String = "save_load_system/encryption_key"
 const SAVE_PATH: String = "user://saves/"
+
 func _enable_plugin() -> void:
 	if not Engine.has_singleton(AUTOLOAD_NAME):
 		add_autoload_singleton(AUTOLOAD_NAME, "res://addons/save_load_system/save_load_system.gd")
