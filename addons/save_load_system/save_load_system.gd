@@ -1,4 +1,3 @@
-class_name SaveLoad
 extends Node
 
 var file_manager: FileManager

@@ -7,7 +7,7 @@ const ENCRYPTION_KEY_SETTING_NAME: String = "save_load_system/encryption_key"
 
 func _enable_plugin() -> void:
 	if not Engine.has_singleton(AUTOLOAD_NAME):
-		add_autoload_singleton(AUTOLOAD_NAME, "res://addons/GodotSaveLoadSystem/save_load_system.gd")
+		add_autoload_singleton(AUTOLOAD_NAME, "res://addons/save_load_system/save_load_system.gd")
 
 func _disable_plugin() -> void:
 	remove_autoload_singleton(AUTOLOAD_NAME)
