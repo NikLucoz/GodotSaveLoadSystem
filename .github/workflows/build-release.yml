@@ -1,0 +1,61 @@
+name: Build & Release Addons Zip on Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  package-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read current version
+        id: get_version
+        run: |
+          VERSION=$(cat version.txt)
+          echo "Current version: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Calculate next version
+        id: next_version
+        run: |
+          VERSION=${VERSION:-0.0}
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          
+          if [ "$MINOR" -lt 9 ]; then
+            MINOR=$((MINOR + 1))
+          else
+            MINOR=0
+            MAJOR=$((MAJOR + 1))
+          fi
+
+          NEXT_VERSION="$MAJOR.$MINOR"
+          echo "Next version: $NEXT_VERSION"
+          echo $NEXT_VERSION > version.txt
+          echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add version.txt
+          git commit -m "Bump version to $NEXT_VERSION" || echo "No changes to commit"
+          git push
+
+      - uses: vimtor/action-zip@v1.2
+        with:
+          files: addons/
+          dest: addons.zip
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: addons.zip
+          allowUpdates: false
+          tag: v${{ env.NEXT_VERSION }}
+          name: Save Load System Plugin v${{ env.NEXT_VERSION }}
