@@ -20,7 +20,7 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           artifacts: addons.zip
-          allowUpdates: true
+          allowUpdates: false
           tag: release
           name: Save Load System Plugin v1.${{ github.run_number }}
         env:
