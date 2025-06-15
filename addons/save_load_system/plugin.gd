@@ -4,10 +4,11 @@ extends EditorPlugin
 const AUTOLOAD_NAME = "SaveLoadSystem"
 const USE_ENCRYPTION_SETTING_NAME: String = "save_load_system/use_encryption"
 const ENCRYPTION_KEY_SETTING_NAME: String = "save_load_system/encryption_key"
+const save_load_system_script_path: String = "res://addons/save_load_system/save_load_system.gd"
 
 func _enable_plugin() -> void:
 	if not Engine.has_singleton(AUTOLOAD_NAME):
-		add_autoload_singleton(AUTOLOAD_NAME, "res://addons/save_load_system/save_load_system.gd")
+		add_autoload_singleton(AUTOLOAD_NAME, save_load_system_script_path)
 	
 	var error = DirAccess.make_dir_recursive_absolute(SAVE_PATH) 
 	if error != OK:
