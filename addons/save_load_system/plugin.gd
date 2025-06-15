@@ -5,6 +5,8 @@ const AUTOLOAD_NAME = "SaveLoadSystem"
 const USE_ENCRYPTION_SETTING_NAME: String = "save_load_system/use_encryption"
 const ENCRYPTION_KEY_SETTING_NAME: String = "save_load_system/encryption_key"
 const save_load_system_script_path: String = "res://addons/save_load_system/save_load_system.gd"
+const SAVE_PATH: String = "user://saves/"
+
 
 func _enable_plugin() -> void:
 	if not Engine.has_singleton(AUTOLOAD_NAME):
@@ -52,10 +54,15 @@ func _enter_tree():
 	ProjectSettings.set_initial_value(ENCRYPTION_KEY_SETTING_NAME, "un2IAd9ShlecsmvQZVdJsnxya2Abmft3")
 	ProjectSettings.set_as_basic(ENCRYPTION_KEY_SETTING_NAME, true)
 	ProjectSettings.save()
+	
+	call_deferred("_call_initial_configuration")
+
+func _call_initial_configuration():
+	if Engine.has_singleton(AUTOLOAD_NAME):
+		var save_system = Engine.get_singleton(AUTOLOAD_NAME)
+		save_system._initial_configuration(SAVE_PATH)
 
 func _exit_tree():
-	pass
-
 	if ProjectSettings.has_setting(USE_ENCRYPTION_SETTING_NAME):
 		ProjectSettings.set_setting(USE_ENCRYPTION_SETTING_NAME, null)
 		

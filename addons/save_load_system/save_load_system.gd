@@ -10,7 +10,6 @@ signal save_error(err: Error)
 
 func _initial_configuration(save_folder_path: String, file_number: int = 1) -> void:
 	file_manager = FileManager.new(save_folder_path, file_number)
-	pass
 
 func change_savefile_number(number: int) -> void:
 	file_manager.set_file_number(number)

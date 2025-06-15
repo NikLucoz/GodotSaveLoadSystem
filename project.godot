@@ -13,11 +13,11 @@ config_version=5
 config/name="GodotSaveLoadSystem"
 config/description="Enter an interesting project description here!"
 config/features=PackedStringArray("4.4")
-config/icon="res://icon.png"
+config/icon="uid://cb0uqjcwfbkjx"
 
 [autoload]
 
-SaveLoadSystem="*res://addons/GodotSaveLoadSystem/save_load_system.gd"
+SaveLoadSystem="*res://addons/save_load_system/save_load_system.gd"
 
 [dotnet]
 
@@ -25,4 +25,4 @@ project/assembly_name="GodotSaveLoadSystem"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotSaveLoadSystem/plugin.cfg")
+enabled=PackedStringArray("res://addons/save_load_system/plugin.cfg")
