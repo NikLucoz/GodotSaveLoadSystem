@@ -1,0 +1,34 @@
+name: 📦 Build & Release Addons Zip on Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  package-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 🛎️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔐 Create ZIP archive containing only addons/
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          type: zip
+          filename: godot_save_load_system.zip
+          directory: '.'         # root of repo
+          path: 'addons'         # include this folder
+          exclusions: ''         # no exclusions inside addons/
+
+      - name: 📦 Create or update Release on GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: addons.zip
+          allowUpdates: true
+          tag: main-release-${{ github.run_number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
