@@ -68,6 +68,4 @@ jobs:
           allowUpdates: false
           tag: v${{ env.NEXT_VERSION }}
           name: Save Load System Plugin v${{ env.NEXT_VERSION }}
-          body: |
-            Commit Message:
-            ${{ env.COMMIT_MESSAGE }}
+          body: ${{ env.COMMIT_MESSAGE }}
