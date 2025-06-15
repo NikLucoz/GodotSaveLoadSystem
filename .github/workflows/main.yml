@@ -21,6 +21,7 @@ jobs:
         with:
           artifacts: addons.zip
           allowUpdates: true
-          tag: Save Load System Plugin v1.-${{ github.run_number }}
+          tag: release
+          name: Save Load System Plugin v1.-${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
