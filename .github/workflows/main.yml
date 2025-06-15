@@ -20,7 +20,7 @@ jobs:
         with:
           type: zip
           filename: release.zip
-          path: path/to/your/folder
+          path: "addons/"
           exclusions: '/.git,/**/*.github/*'
 
       - name: 📦 Create or update Release on GitHub
