@@ -8,6 +8,9 @@ signal savefile_number_changed
 signal save_done
 signal save_error(err: Error)
 
+func _enter_tree() -> void:
+	_initial_configuration("user://saves/")
+
 func _initial_configuration(save_folder_path: String, file_number: int = 1) -> void:
 	file_manager = FileManager.new(save_folder_path, file_number)
 
